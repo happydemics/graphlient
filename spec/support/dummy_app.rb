@@ -16,4 +16,8 @@ post '/graphql' do
     context: {},
     operation_name: params[:operationName]
   ).to_json
+rescue => e
+puts  "===="
+  puts e
+  raise
 end

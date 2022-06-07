@@ -1,4 +1,5 @@
 require_relative '../types/invoice_type'
+require_relative '../models/invoice'
 class Query < GraphQL::Schema::Object
   field :invoice, InvoiceType, null: true do
     description 'Find invoice'
@@ -12,9 +13,7 @@ class Query < GraphQL::Schema::Object
 
   def invoice(id: nil)
     return nil if id.nil?
-    OpenStruct.new(
-      id: id,
-      fee_in_cents: 20_000
+    Invoice.new(      id,20_000
     )
   end
 

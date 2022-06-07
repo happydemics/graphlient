@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'faraday/rack'
 
 describe Graphlient::Client do
   describe 'parse and execute' do
@@ -10,7 +11,7 @@ describe Graphlient::Client do
       ) do |client|
         client.http do |h|
           h.connection do |c|
-            c.adapter Faraday::Adapter::Rack, Sinatra::Application
+            c.adapter :rack, Sinatra::Application
           end
         end
       end

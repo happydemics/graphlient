@@ -97,7 +97,7 @@ describe Graphlient::Client do
 
       it 'fails on an execution error' do
         expect do
-          allow(OpenStruct).to receive(:new).and_raise StandardError, 'Unexpected error.'
+          allow(Invoice).to receive(:new).and_raise StandardError, 'Unexpected error.'
           client.execute(query, id: 42)
         end.to raise_error Graphlient::Errors::ExecutionError do |e|
           expect(e.to_s).to eq 'invoice: Unexpected error.'

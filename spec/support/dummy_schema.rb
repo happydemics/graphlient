@@ -8,10 +8,7 @@ require 'graphql/errors'
 class DummySchema < GraphQL::Schema
   query(Query)
   mutation(MutationType)
-end
-
-GraphQL::Errors.configure(DummySchema) do
-  rescue_from StandardError do |e|
+  rescue_from(StandardError) do |e|
     GraphQL::ExecutionError.new(e.message)
   end
 end

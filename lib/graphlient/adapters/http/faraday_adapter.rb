@@ -1,5 +1,4 @@
 require 'faraday'
-require 'faraday_middleware'
 
 module Graphlient
   module Adapters
@@ -27,17 +26,13 @@ module Graphlient
 
         def connection
           @connection ||= Faraday.new(url: url, headers: headers) do |c|
-            c.use Faraday::Response::RaiseError
+            c.response :raise_error
             c.request :json
-            c.response :json
+            c.response :json, content_type: //
 
             configure_http_options(c.options)
 
-            if block_given?
-              yield c
-            else
-              c.adapter Faraday::Adapter::NetHttp
-            end
+            yield c if block_given?
           end
         end
       end

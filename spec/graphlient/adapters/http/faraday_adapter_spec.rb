@@ -19,8 +19,8 @@ describe Graphlient::Adapters::HTTP::FaradayAdapter do
       expect(client.http.connection.builder.handlers).to eq(
         [
           Faraday::Response::RaiseError,
-          FaradayMiddleware::EncodeJson,
-          FaradayMiddleware::ParseJson
+          Faraday::Request::Json,
+          Faraday::Response::Json
         ]
       )
     end
